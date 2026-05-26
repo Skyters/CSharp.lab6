@@ -1,5 +1,6 @@
 using static CSharp.lab6.Emitter;
 using static CSharp.lab6.Particle;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace CSharp.lab6
 {
@@ -24,7 +25,7 @@ namespace CSharp.lab6
             this.emitter = new Emitter
             {
                 Direction = 0,
-                Spreading = 10,
+                Spreading = 0,
                 SpeedMin = 10,
                 SpeedMax = 10,
                 ColorFrom = Color.Gold,
@@ -63,7 +64,7 @@ namespace CSharp.lab6
             {
                 X = picDisplay.Width / 2 - 50,
                 Y = picDisplay.Height / 4,
-               
+
             };
 
             // привязываем поля к эмиттеру
@@ -110,6 +111,7 @@ namespace CSharp.lab6
 
         private void tbSpread_Scroll(object sender, EventArgs e)
         {
+            
             emitter.Spreading = tbSpread.Value;
             lblSpread.Text = $"{tbSpread.Value}";
         }
@@ -132,6 +134,24 @@ namespace CSharp.lab6
                 point3.Radius + e.Delta / 10,
                 0, 200
             );
+        }
+
+        private void btnradio1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (btnradio1.Checked == true)
+            {
+                emitter.GravitationY = 1;
+            }
+            else emitter.GravitationY = 0;
+        }
+
+        private void btnradio2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (btnradio1.Checked == false)
+            {
+                emitter.GravitationY = 0;
+            }
+            else emitter.GravitationY = 1;
         }
     }
 }

@@ -43,6 +43,8 @@
             label4 = new Label();
             lblAntiGraviton = new Label();
             lblGraviton = new Label();
+            btnradio1 = new RadioButton();
+            btnradio2 = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)picDisplay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbDirection).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbSpread).BeginInit();
@@ -174,11 +176,37 @@
             lblGraviton.TabIndex = 12;
             lblGraviton.Text = "0°";
             // 
+            // btnradio1
+            // 
+            btnradio1.AutoSize = true;
+            btnradio1.Location = new Point(508, 12);
+            btnradio1.Name = "btnradio1";
+            btnradio1.Size = new Size(149, 19);
+            btnradio1.TabIndex = 13;
+            btnradio1.TabStop = true;
+            btnradio1.Text = "Включить гравитацию";
+            btnradio1.UseVisualStyleBackColor = true;
+            btnradio1.CheckedChanged += btnradio1_CheckedChanged_1;
+            // 
+            // btnradio2
+            // 
+            btnradio2.AutoSize = true;
+            btnradio2.Location = new Point(508, 37);
+            btnradio2.Name = "btnradio2";
+            btnradio2.Size = new Size(156, 19);
+            btnradio2.TabIndex = 14;
+            btnradio2.TabStop = true;
+            btnradio2.Text = "Отключить гравитацию";
+            btnradio2.UseVisualStyleBackColor = true;
+            btnradio2.CheckedChanged += btnradio2_CheckedChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(608, 450);
+            ClientSize = new Size(661, 450);
+            Controls.Add(btnradio2);
+            Controls.Add(btnradio1);
             Controls.Add(lblGraviton);
             Controls.Add(lblAntiGraviton);
             Controls.Add(label4);
@@ -219,5 +247,7 @@
         private Label label4;
         private Label lblAntiGraviton;
         private Label lblGraviton;
+        private RadioButton btnradio1;
+        private RadioButton btnradio2;
     }
 }
