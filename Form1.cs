@@ -9,8 +9,10 @@ namespace CSharp.lab6
         Emitter emitter;
 
         GravityPoint point1;
-        GravityPoint point2;
-        GravityPoint point3;
+        AntiGravityPoint point2;
+        BouncePoint point3;
+        BouncePoint point4;
+        BouncePoint point5;
 
         public Form1()
         {
@@ -39,24 +41,37 @@ namespace CSharp.lab6
             // привязываем гравитоны к полям
             point1 = new GravityPoint
             {
-                X = picDisplay.Width / 2 + 100,
-                Y = picDisplay.Height / 2,
+                X = picDisplay.Width / 2 + 200,
+                Y = (float)(picDisplay.Height / 1.2),
             };
-            point2 = new GravityPoint
+            point2 = new AntiGravityPoint
+            {
+                X = picDisplay.Width / 2 - 140,
+                Y = picDisplay.Height / 1,
+            };
+            point3 = new BouncePoint
             {
                 X = picDisplay.Width / 2 - 100,
                 Y = picDisplay.Height / 2,
             };
-            point3 = new GravityPoint
+            point4 = new BouncePoint
             {
-                X = picDisplay.Width / 2 - 100,
+                X = picDisplay.Width / 2 + 150,
                 Y = picDisplay.Height / 2,
+            };
+            point5 = new BouncePoint
+            {
+                X = picDisplay.Width / 2 - 50,
+                Y = picDisplay.Height / 4,
+               
             };
 
             // привязываем поля к эмиттеру
             emitter.impactPoints.Add(point1);
             emitter.impactPoints.Add(point2);
             emitter.impactPoints.Add(point3);
+            emitter.impactPoints.Add(point4);
+            emitter.impactPoints.Add(point5);
         }
 
         private void timer1_Tick(object sender, EventArgs e) // dsdjl xfcnbws
