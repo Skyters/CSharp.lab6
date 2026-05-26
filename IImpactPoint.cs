@@ -20,8 +20,8 @@ namespace CSharp.lab6
                     new SolidBrush(Color.Red),
                     X - 5,
                     Y - 5,
-                    10,
-                    10
+                    5,
+                    5
                 );
         }
     }

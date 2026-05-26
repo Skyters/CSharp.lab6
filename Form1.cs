@@ -8,6 +8,10 @@ namespace CSharp.lab6
         List<Emitter> emitters = new List<Emitter>();
         Emitter emitter;
 
+        GravityPoint point1;
+        GravityPoint point2;
+        GravityPoint point3;
+
         public Form1()
         {
             InitializeComponent();
@@ -32,21 +36,27 @@ namespace CSharp.lab6
 
 
 
-            // гравитон
-            emitter.impactPoints.Add(new GravityPoint
+            // привязываем гравитоны к полям
+            point1 = new GravityPoint
             {
                 X = picDisplay.Width / 2 + 100,
                 Y = picDisplay.Height / 2,
-            });
-
-
-            // снова гравитон
-            emitter.impactPoints.Add(new GravityPoint
+            };
+            point2 = new GravityPoint
             {
                 X = picDisplay.Width / 2 - 100,
                 Y = picDisplay.Height / 2,
-            });
+            };
+            point3 = new GravityPoint
+            {
+                X = picDisplay.Width / 2 - 100,
+                Y = picDisplay.Height / 2,
+            };
 
+            // привязываем поля к эмиттеру
+            emitter.impactPoints.Add(point1);
+            emitter.impactPoints.Add(point2);
+            emitter.impactPoints.Add(point3);
         }
 
         private void timer1_Tick(object sender, EventArgs e) // dsdjl xfcnbws
@@ -67,8 +77,14 @@ namespace CSharp.lab6
         private void picDisplay_MouseMove(object sender, MouseEventArgs e)
         {
             // в обработчике заносим положение мыши в переменные для хранения положения мыши
-            emitter.MousePositionX = e.X;
-            emitter.MousePositionY = e.Y;
+            foreach (var emitter in emitters)
+            {
+                emitter.MousePositionX = e.X;
+                emitter.MousePositionY = e.Y;
+            }
+
+            point3.X = e.X;
+            point3.Y = e.Y;
         }
 
         private void tbDirection_Scroll(object sender, EventArgs e)
@@ -83,16 +99,14 @@ namespace CSharp.lab6
             lblSpread.Text = $"{tbSpread.Value}";
         }
 
-        private void tbGravition_Scroll(object sender, EventArgs e)
+        private void tbGraviton1_Scroll(object sender, EventArgs e)
         {
-            foreach (var p in emitter.impactPoints)
-            {
-                if (p is GravityPoint) // так как impactPoints не обязательно содержит поле Power, надо проверить на тип 
-                {
-                    // если гравитон то меняем силу
-                    (p as GravityPoint).Power = tbGraviton.Value;
-                }
-            }
+            point1.Power = tbGraviton1.Value;
+        }
+
+        private void tbGraviton2_Scroll(object sender, EventArgs e)
+        {
+            point1.Power = tbGraviton2.Value;
         }
     }
 }
