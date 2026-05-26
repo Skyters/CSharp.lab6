@@ -10,6 +10,8 @@ namespace CSharp.lab6
         List<Particle> particles = new List<Particle>();
         public int MousePositionX;
         public int MousePositionY;
+        public float GravitationX = 0;
+        public float GravitationY = 1;
 
         public void UpdateState() // обновления состояния системы
         {
@@ -42,6 +44,11 @@ namespace CSharp.lab6
                 }
                 else
                 {
+
+                    // гравитация воздействует на вектор скорости, поэтому пересчитываем его
+                    particle.SpeedX += GravitationX;
+                    particle.SpeedY += GravitationY;
+
                     // храним вектор скорости в явном виде и его не надо пересчитывать
                     particle.X += particle.SpeedX;
                     particle.Y += particle.SpeedY;
