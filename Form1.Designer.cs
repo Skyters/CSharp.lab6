@@ -59,6 +59,7 @@
             picDisplay.Size = new Size(490, 329);
             picDisplay.TabIndex = 0;
             picDisplay.TabStop = false;
+            picDisplay.MouseClick += picDisplay_MouseClick;
             picDisplay.MouseMove += picDisplay_MouseMove;
             picDisplay.MouseWheel += picDisplay_MouseWheel;
             // 

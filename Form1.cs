@@ -111,7 +111,7 @@ namespace CSharp.lab6
 
         private void tbSpread_Scroll(object sender, EventArgs e)
         {
-            
+
             emitter.Spreading = tbSpread.Value;
             lblSpread.Text = $"{tbSpread.Value}";
         }
@@ -153,5 +153,18 @@ namespace CSharp.lab6
             }
             else emitter.GravitationY = 1;
         }
+
+        private void picDisplay_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                if (emitter.impactPoints.Contains(point3))
+                    emitter.impactPoints.Remove(point3);
+                else
+                    emitter.impactPoints.Add(point3);
+            }
+        }
+
+
     }
 }
