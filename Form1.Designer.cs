@@ -37,9 +37,11 @@
             tbSpread = new TrackBar();
             label2 = new Label();
             lblSpread = new Label();
+            tbGraviton = new TrackBar();
             ((System.ComponentModel.ISupportInitialize)picDisplay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbDirection).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbSpread).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbGraviton).BeginInit();
             SuspendLayout();
             // 
             // picDisplay
@@ -111,11 +113,21 @@
             lblSpread.TabIndex = 6;
             lblSpread.Text = "0°";
             // 
+            // tbGraviton
+            // 
+            tbGraviton.Location = new Point(310, 393);
+            tbGraviton.Maximum = 360;
+            tbGraviton.Name = "tbGraviton";
+            tbGraviton.Size = new Size(119, 45);
+            tbGraviton.TabIndex = 7;
+            tbGraviton.Scroll += tbGravition_Scroll;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(608, 450);
+            Controls.Add(tbGraviton);
             Controls.Add(lblSpread);
             Controls.Add(label2);
             Controls.Add(tbSpread);
@@ -128,6 +140,7 @@
             ((System.ComponentModel.ISupportInitialize)picDisplay).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbDirection).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbSpread).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbGraviton).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -142,5 +155,6 @@
         private TrackBar tbSpread;
         private Label label2;
         private Label lblSpread;
+        private TrackBar tbGraviton;
     }
 }

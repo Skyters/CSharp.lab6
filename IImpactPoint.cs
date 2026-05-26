@@ -14,7 +14,7 @@ namespace CSharp.lab6
         public abstract void ImpactParticle(Particle particle);
 
         // базовый класс для отрисовки точечки
-        public void Render(Graphics g)
+        public virtual void Render(Graphics g)
         {
             g.FillEllipse(
                     new SolidBrush(Color.Red),
@@ -25,6 +25,7 @@ namespace CSharp.lab6
                 );
         }
     }
+
 
     public class GravityPoint : IImpactPoint
     {
@@ -39,6 +40,18 @@ namespace CSharp.lab6
 
             particle.SpeedX += gX * Power / r2;
             particle.SpeedY += gY * Power / r2;
+        }
+
+        public override void Render(Graphics g)
+        {
+            // окружность
+            g.DrawEllipse(
+                   new Pen(Color.Red),
+                   X - Power / 2,
+                   Y - Power / 2,
+                   Power,
+                   Power
+               );
         }
     }
 

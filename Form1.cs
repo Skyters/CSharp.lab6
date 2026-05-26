@@ -31,28 +31,22 @@ namespace CSharp.lab6
             emitters.Add(this.emitter); // рендер и обновл
 
 
-            /*
+
             // гравитон
             emitter.impactPoints.Add(new GravityPoint
             {
-                X = (float)(picDisplay.Width * 0.25),
-                Y = picDisplay.Height / 2
+                X = picDisplay.Width / 2 + 100,
+                Y = picDisplay.Height / 2,
             });
 
-            // в центре антигравитон
-            emitter.impactPoints.Add(new AntiGravityPoint
-            {
-                X = picDisplay.Width / 2,
-                Y = picDisplay.Height / 2
-            });
 
             // снова гравитон
             emitter.impactPoints.Add(new GravityPoint
             {
-                X = (float)(picDisplay.Width * 0.75),
-                Y = picDisplay.Height / 2
+                X = picDisplay.Width / 2 - 100,
+                Y = picDisplay.Height / 2,
             });
-            */
+
         }
 
         private void timer1_Tick(object sender, EventArgs e) // dsdjl xfcnbws
@@ -87,6 +81,18 @@ namespace CSharp.lab6
         {
             emitter.Spreading = tbSpread.Value;
             lblSpread.Text = $"{tbSpread.Value}";
+        }
+
+        private void tbGravition_Scroll(object sender, EventArgs e)
+        {
+            foreach (var p in emitter.impactPoints)
+            {
+                if (p is GravityPoint) // так как impactPoints не обязательно содержит поле Power, надо проверить на тип 
+                {
+                    // если гравитон то меняем силу
+                    (p as GravityPoint).Power = tbGraviton.Value;
+                }
+            }
         }
     }
 }
