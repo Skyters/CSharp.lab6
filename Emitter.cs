@@ -16,6 +16,20 @@ namespace CSharp.lab6
 
         public int ParticlesCount = 500;
 
+        public int X; // координата X центра эмиттера, будем ее использовать вместо MousePositionX
+        public int Y; // соответствующая координата Y 
+        public int Direction = 0; // вектор направления в градусах куда сыпет эмиттер
+        public int Spreading = 360; // разброс частиц относительно Direction
+        public int SpeedMin = 1; // начальная минимальная скорость движения частицы
+        public int SpeedMax = 10; // начальная максимальная скорость движения частицы
+        public int RadiusMin = 2; // минимальный радиус частицы
+        public int RadiusMax = 10; // максимальный радиус частицы
+        public int LifeMin = 20; // минимальное время жизни частицы
+        public int LifeMax = 100; // максимальное время жизни частицы
+
+        public Color ColorFrom = Color.White; // начальный цвет частицы
+        public Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
+
 
 
         public void UpdateState() // обновления состояния системы
@@ -51,21 +65,26 @@ namespace CSharp.lab6
             {
                 if (particles.Count < ParticlesCount) // пока частиц меньше 500 генерируем новые
                 {
-                    var particle = new ParticleColorful();
+                    var particle = CreateParticle();
+
+                    ResetParticle(particle);
+                    particles.Add(particle);
+
+                    /*
                     // ну и цвета меняем
                     particle.FromColor = Color.Yellow;
                     particle.ToColor = Color.FromArgb(0, Color.Magenta);
+                    */
 
-                    particle.X = MousePositionX;
-                    particle.Y = MousePositionY;
+                    // particle.X = MousePositionX;
+                    // particle.Y = MousePositionY;
+
                     /*// переношу частицы в центр изображения
                     particle.X = picDisplay.Image.Width / 2;
                     particle.Y = picDisplay.Image.Height / 2;
                     */
 
-                    ResetParticle(particle);
-
-                    particles.Add(particle);
+                                     
                 }
                 else
                 {
@@ -92,11 +111,11 @@ namespace CSharp.lab6
         public virtual void ResetParticle(Particle particle)
         {
             // восстанавливаю здоровье
-            particle.Life = 20 + Particle.rand.Next(100);
+            particle.Life = Particle.rand.Next(LifeMin, LifeMax);
 
             // новое начальное расположение частицы — это то, куда указывает курсор
-            particle.X = MousePositionX;
-            particle.Y = MousePositionY;
+            particle.X = X;
+            particle.Y = Y;
             /*// перемещаю частицу в центр
             particle.Direction = Particle.rand.Next(360);
             particle.Speed = 1 + Particle.rand.Next(10);
@@ -104,13 +123,15 @@ namespace CSharp.lab6
             */
 
             /* сброс состояния частицы */
-            var direction = (double)Particle.rand.Next(360);
+            var direction = Direction
+                + (double)Particle.rand.Next(Spreading)
+                - Spreading / 2;
             var speed = 1 + Particle.rand.Next(10);
 
             particle.SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
             particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
 
-            particle.Radius = 2 + Particle.rand.Next(10);
+            particle.Radius = Particle.rand.Next(RadiusMin, RadiusMax);
         }
 
         public class TopEmitter : Emitter
@@ -128,6 +149,15 @@ namespace CSharp.lab6
                 particle.SpeedY = 1; // падаем вниз по умолчанию
                 particle.SpeedX = Particle.rand.Next(-2, 2); // разброс влево и вправа у частиц 
             }
+        }
+
+        public virtual Particle CreateParticle()
+        {
+            var particle = new ParticleColorful();
+            particle.FromColor = ColorFrom;
+            particle.ToColor = ColorTo;
+
+            return particle;
         }
     }
 
