@@ -52,6 +52,10 @@ namespace CSharp.lab6
 
                 else
                 {
+                    // храним вектор скорости в явном виде и его не надо пересчитывать
+                    particle.X += particle.SpeedX;
+                    particle.Y += particle.SpeedY;
+
                     // каждая точка по-своему воздействует на вектор скорости
                     foreach (var point in impactPoints)
                     {
@@ -62,9 +66,6 @@ namespace CSharp.lab6
                     particle.SpeedX += GravitationX;
                     particle.SpeedY += GravitationY;
 
-                    // храним вектор скорости в явном виде и его не надо пересчитывать
-                    particle.X += particle.SpeedX;
-                    particle.Y += particle.SpeedY;
                 }
             }
 
