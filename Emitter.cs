@@ -14,6 +14,10 @@ namespace CSharp.lab6
         public float GravitationX = 0;
         public float GravitationY = 0;
 
+        public int ParticlesCount = 500;
+
+
+
         public void UpdateState() // обновления состояния системы
         {
             foreach (var particle in particles)
@@ -43,9 +47,9 @@ namespace CSharp.lab6
             }
 
             // генерирую 500 частиц
-            for (var i = 0; i < 500; ++i)
+            for (var i = 0; i < 10; ++i)
             {
-                if (particles.Count < 500) // пока частиц меньше 500 генерируем новые
+                if (particles.Count < ParticlesCount) // пока частиц меньше 500 генерируем новые
                 {
                     var particle = new ParticleColorful();
                     // ну и цвета меняем
