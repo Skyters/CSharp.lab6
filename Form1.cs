@@ -13,18 +13,6 @@ namespace CSharp.lab6
 
             // привязал изображение
             picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
-
-            // генерирую 500 частиц
-            for (var i = 0; i < 500; ++i)
-            {
-                var particle = new Particle();
-                // переношу частицы в центр изображения
-                particle.X = picDisplay.Image.Width / 2;
-                particle.Y = picDisplay.Image.Height / 2;
-                // добавляю список
-                particles.Add(particle);
-            }
-
         }
 
         private void timer1_Tick(object sender, EventArgs e) // dsdjl xfcnbws
@@ -69,6 +57,28 @@ namespace CSharp.lab6
                     particle.Y -= (float)(particle.Speed * Math.Sin(directionInRadians));
                 }
             }
+
+            // генерирую 500 частиц
+            for (var i = 0; i < 500; ++i)
+            {
+                if (particles.Count < 500) // пока частиц меньше 500 генерируем новые
+                {
+                    var particle = new Particle();
+                    particle.X = MousePositionX;
+                    particle.Y = MousePositionY;
+                    /*// переношу частицы в центр изображения
+                    particle.X = picDisplay.Image.Width / 2;
+                    particle.Y = picDisplay.Image.Height / 2;
+                    */
+                    // добавляю список
+                    particles.Add(particle);
+                }
+                else
+                {
+                    break; // а если частиц уже 500 штук, то ничего не генерирую
+                }
+            }
+
         }
 
         private void Render(Graphics g)
