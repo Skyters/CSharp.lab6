@@ -37,13 +37,17 @@
             tbSpread = new TrackBar();
             label2 = new Label();
             lblSpread = new Label();
-            tbGraviton1 = new TrackBar();
-            tbGraviton2 = new TrackBar();
+            tbGraviton = new TrackBar();
+            tbAntiGraviton = new TrackBar();
+            label3 = new Label();
+            label4 = new Label();
+            lblAntiGraviton = new Label();
+            lblGraviton = new Label();
             ((System.ComponentModel.ISupportInitialize)picDisplay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbDirection).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbSpread).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)tbGraviton1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)tbGraviton2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbGraviton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAntiGraviton).BeginInit();
             SuspendLayout();
             // 
             // picDisplay
@@ -54,6 +58,7 @@
             picDisplay.TabIndex = 0;
             picDisplay.TabStop = false;
             picDisplay.MouseMove += picDisplay_MouseMove;
+            picDisplay.MouseWheel += picDisplay_MouseWheel;
             // 
             // timer1
             // 
@@ -115,31 +120,71 @@
             lblSpread.TabIndex = 6;
             lblSpread.Text = "0°";
             // 
-            // tbGraviton1
+            // tbGraviton
             // 
-            tbGraviton1.Location = new Point(435, 393);
-            tbGraviton1.Maximum = 360;
-            tbGraviton1.Name = "tbGraviton1";
-            tbGraviton1.Size = new Size(119, 45);
-            tbGraviton1.TabIndex = 7;
-            tbGraviton1.Scroll += tbGraviton1_Scroll;
+            tbGraviton.Location = new Point(462, 393);
+            tbGraviton.Maximum = 100;
+            tbGraviton.Name = "tbGraviton";
+            tbGraviton.Size = new Size(119, 45);
+            tbGraviton.TabIndex = 7;
+            tbGraviton.Scroll += tbGraviton_Scroll;
             // 
-            // tbGraviton2
+            // tbAntiGraviton
             // 
-            tbGraviton2.Location = new Point(310, 393);
-            tbGraviton2.Maximum = 360;
-            tbGraviton2.Name = "tbGraviton2";
-            tbGraviton2.Size = new Size(119, 45);
-            tbGraviton2.TabIndex = 8;
-            tbGraviton2.Scroll += tbGraviton2_Scroll;
+            tbAntiGraviton.Location = new Point(310, 393);
+            tbAntiGraviton.Maximum = 100;
+            tbAntiGraviton.Name = "tbAntiGraviton";
+            tbAntiGraviton.Size = new Size(119, 45);
+            tbAntiGraviton.TabIndex = 8;
+            tbAntiGraviton.Scroll += tbAntiGraviton_Scroll;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(310, 375);
+            label3.Name = "label3";
+            label3.Size = new Size(84, 15);
+            label3.TabIndex = 9;
+            label3.Text = "Антигравитон";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(462, 375);
+            label4.Name = "label4";
+            label4.Size = new Size(58, 15);
+            label4.TabIndex = 10;
+            label4.Text = "Гравитон";
+            // 
+            // lblAntiGraviton
+            // 
+            lblAntiGraviton.AutoSize = true;
+            lblAntiGraviton.Location = new Point(435, 393);
+            lblAntiGraviton.Name = "lblAntiGraviton";
+            lblAntiGraviton.Size = new Size(18, 15);
+            lblAntiGraviton.TabIndex = 11;
+            lblAntiGraviton.Text = "0°";
+            // 
+            // lblGraviton
+            // 
+            lblGraviton.AutoSize = true;
+            lblGraviton.Location = new Point(578, 393);
+            lblGraviton.Name = "lblGraviton";
+            lblGraviton.Size = new Size(18, 15);
+            lblGraviton.TabIndex = 12;
+            lblGraviton.Text = "0°";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(608, 450);
-            Controls.Add(tbGraviton2);
-            Controls.Add(tbGraviton1);
+            Controls.Add(lblGraviton);
+            Controls.Add(lblAntiGraviton);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(tbAntiGraviton);
+            Controls.Add(tbGraviton);
             Controls.Add(lblSpread);
             Controls.Add(label2);
             Controls.Add(tbSpread);
@@ -152,8 +197,8 @@
             ((System.ComponentModel.ISupportInitialize)picDisplay).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbDirection).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbSpread).EndInit();
-            ((System.ComponentModel.ISupportInitialize)tbGraviton1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)tbGraviton2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbGraviton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAntiGraviton).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -168,7 +213,11 @@
         private TrackBar tbSpread;
         private Label label2;
         private Label lblSpread;
-        private TrackBar tbGraviton1;
-        private TrackBar tbGraviton2;
+        private TrackBar tbGraviton;
+        private TrackBar tbAntiGraviton;
+        private Label label3;
+        private Label label4;
+        private Label lblAntiGraviton;
+        private Label lblGraviton;
     }
 }

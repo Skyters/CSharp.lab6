@@ -114,14 +114,24 @@ namespace CSharp.lab6
             lblSpread.Text = $"{tbSpread.Value}";
         }
 
-        private void tbGraviton1_Scroll(object sender, EventArgs e)
+        private void tbGraviton_Scroll(object sender, EventArgs e)
         {
-            point1.Power = tbGraviton1.Value;
+            point1.Power = tbGraviton.Value;
+            lblGraviton.Text = $"{tbGraviton.Value}";
         }
 
-        private void tbGraviton2_Scroll(object sender, EventArgs e)
+        private void tbAntiGraviton_Scroll(object sender, EventArgs e)
         {
-            point2.Power = tbGraviton2.Value;
+            point2.Power = tbAntiGraviton.Value;
+            lblAntiGraviton.Text = $"{tbAntiGraviton.Value}";
+        }
+
+        private void picDisplay_MouseWheel(object sender, MouseEventArgs e)
+        {
+            point3.Radius = Math.Clamp(
+                point3.Radius + e.Delta / 10,
+                0, 200
+            );
         }
     }
 }
