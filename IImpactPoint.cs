@@ -96,27 +96,27 @@ namespace CSharp.lab6
         {
             float dx = particle.X - X;
             float dy = particle.Y - Y;
-            float dist = (float)Math.Sqrt(dx * dx + dy * dy);
+            float r3 = (float)Math.Sqrt(dx * dx + dy * dy);
 
-            // Частица внутри зоны
-            if (dist < Radius && dist > 0.001f)
+            
+            if (r3 < Radius && r3 > 0.001f)
             {
-                // Нормаль: от центра к частице
-                float nx = dx / dist;
-                float ny = dy / dist;
+                
+                float nx = dx / r3;
+                float ny = dy / r3;
 
-                // Проекция скорости на нормаль
+                
                 float dot = particle.SpeedX * nx + particle.SpeedY * ny;
 
-                // Отражаем только если частица летит внутрь (dot < 0)
+               
                 if (dot < 0)
                 {
-                    // v' = v - 2*(v·n)*n
+                    
                     particle.SpeedX -= 2 * dot * nx;
                     particle.SpeedY -= 2 * dot * ny;
                 }
 
-                // Выталкиваем частицу на границу окружности
+                
                 particle.X = X + nx * Radius;
                 particle.Y = Y + ny * Radius;
             }
@@ -125,6 +125,39 @@ namespace CSharp.lab6
         public override void Render(Graphics g)
         {         
             g.DrawEllipse(new Pen(Color.Yellow), X - Radius, Y - Radius, Radius * 2, Radius * 2);
+        }
+    }
+
+    public class CounterPoint : IImpactPoint
+    {
+        public int Radius = 40;
+        public int Count = 0;
+
+        public override void ImpactParticle(Particle particle)
+        {
+            float dx = particle.X - X;
+            float dy = particle.Y - Y;
+            float r4 = (float)Math.Sqrt(dx * dx + dy * dy);
+
+            if (r4 < Radius)
+            {
+                Count++;
+                particle.Life = 0; // частица умирает
+            }
+        }
+
+        public override void Render(Graphics g)
+        {
+            
+            int saturation = Math.Min(255, Count / 2);
+            var color = Color.FromArgb(255, saturation, 0, 0);
+
+            g.FillEllipse(new SolidBrush(Color.Red), X - Radius, Y - Radius, Radius * 2, Radius * 2);
+            g.DrawEllipse(new Pen(Color.Purple), X - Radius, Y - Radius, Radius * 2, Radius * 2);
+
+            var text = Count.ToString();
+            var size = g.MeasureString(text, new Font("Arial", 10, FontStyle.Bold));
+            g.DrawString(text, new Font("Arial", 10, FontStyle.Bold), new SolidBrush(color), X - size.Width / 2, Y - size.Height / 2);
         }
     }
 

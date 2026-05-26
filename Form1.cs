@@ -8,12 +8,14 @@ namespace CSharp.lab6
     {
         List<Emitter> emitters = new List<Emitter>();
         Emitter emitter;
+        List<CounterPoint> counterPoints = new List<CounterPoint>();
 
         GravityPoint point1;
         AntiGravityPoint point2;
         BouncePoint point3;
         BouncePoint point4;
         BouncePoint point5;
+        CounterPoint counterPoint;
 
         public Form1()
         {
@@ -156,7 +158,27 @@ namespace CSharp.lab6
 
         private void picDisplay_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Middle)
+            if (e.Button == MouseButtons.Left)
+            {
+                // новый счётчик на место клика
+                var counter = new CounterPoint { X = e.X, Y = e.Y };
+                counterPoints.Add(counter);
+                emitter.impactPoints.Add(counter);
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                // удалить ближайший счётчик к месту клика
+                var nearest = counterPoints
+                    .OrderBy(c => Math.Pow(c.X - e.X, 2) + Math.Pow(c.Y - e.Y, 2))
+                    .FirstOrDefault();
+
+                if (nearest != null)
+                {
+                    counterPoints.Remove(nearest);
+                    emitter.impactPoints.Remove(nearest);
+                }
+            }
+            else if (e.Button == MouseButtons.Middle)
             {
                 if (emitter.impactPoints.Contains(point3))
                     emitter.impactPoints.Remove(point3);
