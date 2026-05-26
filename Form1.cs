@@ -106,7 +106,7 @@ namespace CSharp.lab6
 
         private void tbGraviton2_Scroll(object sender, EventArgs e)
         {
-            point1.Power = tbGraviton2.Value;
+            point2.Power = tbGraviton2.Value;
         }
     }
 }

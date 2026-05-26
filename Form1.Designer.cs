@@ -117,7 +117,7 @@
             // 
             // tbGraviton1
             // 
-            tbGraviton1.Location = new Point(310, 393);
+            tbGraviton1.Location = new Point(435, 393);
             tbGraviton1.Maximum = 360;
             tbGraviton1.Name = "tbGraviton1";
             tbGraviton1.Size = new Size(119, 45);
@@ -126,7 +126,7 @@
             // 
             // tbGraviton2
             // 
-            tbGraviton2.Location = new Point(435, 393);
+            tbGraviton2.Location = new Point(310, 393);
             tbGraviton2.Maximum = 360;
             tbGraviton2.Name = "tbGraviton2";
             tbGraviton2.Size = new Size(119, 45);
