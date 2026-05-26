@@ -27,6 +27,8 @@ namespace CSharp.lab6
         public int LifeMin = 20; // минимальное время жизни частицы
         public int LifeMax = 100; // максимальное время жизни частицы
 
+        public int ParticlesPerTick = 1;
+
         public Color ColorFrom = Color.White; // начальный цвет частицы
         public Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
 
@@ -34,64 +36,44 @@ namespace CSharp.lab6
 
         public void UpdateState() // обновления состояния системы
         {
+            int particlesToCreate = ParticlesPerTick; // фиксируем счетчик сколько частиц нам создавать за тик
+
             foreach (var particle in particles)
             {
-                particle.Life -= 1; // уменьшаю здоровье
-                                    // если здоровье кончилось
-                if (particle.Life < 0)
+                if (particle.Life <= 0)
                 {
-                    ResetParticle(particle);
-                }
-                else
-                {
-                    // каждая точка по-своему воздействует на вектор скорости
-                    foreach (var point in impactPoints)
+                    if (particlesToCreate > 0)
                     {
-                        point.ImpactParticle(particle);
+                        particlesToCreate -= 1;
+                        ResetParticle(particle);
                     }
+                    else
+                    {
+                        // каждая точка по-своему воздействует на вектор скорости
+                        foreach (var point in impactPoints)
+                        {
+                            point.ImpactParticle(particle);
+                        }
 
-                    // гравитация воздействует на вектор скорости, поэтому пересчитываем его
-                    particle.SpeedX += GravitationX;
-                    particle.SpeedY += GravitationY;
+                        // гравитация воздействует на вектор скорости, поэтому пересчитываем его
+                        particle.SpeedX += GravitationX;
+                        particle.SpeedY += GravitationY;
 
-                    // храним вектор скорости в явном виде и его не надо пересчитывать
-                    particle.X += particle.SpeedX;
-                    particle.Y += particle.SpeedY;
+                        // храним вектор скорости в явном виде и его не надо пересчитывать
+                        particle.X += particle.SpeedX;
+                        particle.Y += particle.SpeedY;
+                    }
                 }
+
             }
 
-            // генерирую 500 частиц
-            for (var i = 0; i < 10; ++i)
+            while (particlesToCreate >= 1)
             {
-                if (particles.Count < ParticlesCount) // пока частиц меньше 500 генерируем новые
-                {
-                    var particle = CreateParticle();
-
-                    ResetParticle(particle);
-                    particles.Add(particle);
-
-                    /*
-                    // ну и цвета меняем
-                    particle.FromColor = Color.Yellow;
-                    particle.ToColor = Color.FromArgb(0, Color.Magenta);
-                    */
-
-                    // particle.X = MousePositionX;
-                    // particle.Y = MousePositionY;
-
-                    /*// переношу частицы в центр изображения
-                    particle.X = picDisplay.Image.Width / 2;
-                    particle.Y = picDisplay.Image.Height / 2;
-                    */
-
-                                     
-                }
-                else
-                {
-                    break; // а если частиц уже 500 штук, то ничего не генерирую
-                }
+                particlesToCreate -= 1;
+                var particle = CreateParticle();
+                ResetParticle(particle);
+                particles.Add(particle);
             }
-
         }
 
         public void Render(Graphics g)
