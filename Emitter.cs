@@ -8,10 +8,11 @@ namespace CSharp.lab6
     public class Emitter
     {
         List<Particle> particles = new List<Particle>();
+        public List<Point> gravityPoints = new List<Point>(); // тут буду хранится точки притяжения
         public int MousePositionX;
         public int MousePositionY;
         public float GravitationX = 0;
-        public float GravitationY = 1;
+        public float GravitationY = 0;
 
         public void UpdateState() // обновления состояния системы
         {
@@ -44,6 +45,17 @@ namespace CSharp.lab6
                 }
                 else
                 {
+                    // каждая точка по-своему воздействует на вектор скорости
+                    foreach (var point in gravityPoints)
+                    {
+                        float gX = point.X - particle.X;
+                        float gY = point.Y - particle.Y;
+                        float r2 = gX * gX + gY * gY;
+                        float M = 100;
+
+                        particle.SpeedX += (gX) * M / r2;
+                        particle.SpeedY += (gY) * M / r2;
+                    }
 
                     // гравитация воздействует на вектор скорости, поэтому пересчитываем его
                     particle.SpeedX += GravitationX;
@@ -87,6 +99,18 @@ namespace CSharp.lab6
             foreach (var particle in particles)
             {
                 particle.Draw(g);
+            }
+
+            // рисую точки притяжения красными кружочками
+            foreach (var point in gravityPoints)
+            {
+                g.FillEllipse(
+                    new SolidBrush(Color.Red),
+                    point.X - 5,
+                    point.Y - 5,
+                    10,
+                    10
+                );
             }
         }
 
