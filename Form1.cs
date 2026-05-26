@@ -1,3 +1,5 @@
+using static CSharp.lab6.Particle;
+
 namespace CSharp.lab6
 {
     public partial class Form1 : Form
@@ -22,7 +24,7 @@ namespace CSharp.lab6
 
             using (var g = Graphics.FromImage(picDisplay.Image))
             {
-                g.Clear(Color.White);
+                g.Clear(Color.Black); // фон
                 Render(g); // рендерим систему
             }
 
@@ -63,7 +65,11 @@ namespace CSharp.lab6
             {
                 if (particles.Count < 500) // пока частиц меньше 500 генерируем новые
                 {
-                    var particle = new Particle();
+                    var particle = new ParticleColorful();
+                    // ну и цвета меняем
+                    particle.FromColor = Color.Yellow;
+                    particle.ToColor = Color.FromArgb(0, Color.Magenta);
+
                     particle.X = MousePositionX;
                     particle.Y = MousePositionY;
                     /*// переношу частицы в центр изображения
