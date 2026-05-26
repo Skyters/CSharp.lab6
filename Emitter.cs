@@ -40,31 +40,32 @@ namespace CSharp.lab6
 
             foreach (var particle in particles)
             {
-                if (particle.Life <= 0)
+                if (particle.Life <= 0) // если частицы умерла
                 {
                     if (particlesToCreate > 0)
                     {
+
                         particlesToCreate -= 1;
                         ResetParticle(particle);
                     }
-                    else
-                    {
-                        // каждая точка по-своему воздействует на вектор скорости
-                        foreach (var point in impactPoints)
-                        {
-                            point.ImpactParticle(particle);
-                        }
-
-                        // гравитация воздействует на вектор скорости, поэтому пересчитываем его
-                        particle.SpeedX += GravitationX;
-                        particle.SpeedY += GravitationY;
-
-                        // храним вектор скорости в явном виде и его не надо пересчитывать
-                        particle.X += particle.SpeedX;
-                        particle.Y += particle.SpeedY;
-                    }
                 }
 
+                else
+                {
+                    // каждая точка по-своему воздействует на вектор скорости
+                    foreach (var point in impactPoints)
+                    {
+                        point.ImpactParticle(particle);
+                    }
+
+                    // гравитация воздействует на вектор скорости, поэтому пересчитываем его
+                    particle.SpeedX += GravitationX;
+                    particle.SpeedY += GravitationY;
+
+                    // храним вектор скорости в явном виде и его не надо пересчитывать
+                    particle.X += particle.SpeedX;
+                    particle.Y += particle.SpeedY;
+                }
             }
 
             while (particlesToCreate >= 1)
@@ -92,23 +93,16 @@ namespace CSharp.lab6
 
         public virtual void ResetParticle(Particle particle)
         {
-            // восстанавливаю здоровье
             particle.Life = Particle.rand.Next(LifeMin, LifeMax);
 
-            // новое начальное расположение частицы — это то, куда указывает курсор
             particle.X = X;
             particle.Y = Y;
-            /*// перемещаю частицу в центр
-            particle.Direction = Particle.rand.Next(360);
-            particle.Speed = 1 + Particle.rand.Next(10);
-            particle.Radius = 2 + Particle.rand.Next(10);
-            */
 
-            /* сброс состояния частицы */
             var direction = Direction
                 + (double)Particle.rand.Next(Spreading)
                 - Spreading / 2;
-            var speed = 1 + Particle.rand.Next(10);
+
+            var speed = Particle.rand.Next(SpeedMin, SpeedMax);
 
             particle.SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
             particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
