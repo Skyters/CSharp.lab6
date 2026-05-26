@@ -5,12 +5,8 @@ namespace CSharp.lab6
 {
     public partial class Form1 : Form
     {
+        List<Emitter> emitters = new List<Emitter>();
         Emitter emitter;
-
-        List<Particle> particles = new List<Particle>();
-        // добавляем переменные для хранения положения мыши
-        private int MousePositionX = 0;
-        private int MousePositionY = 0;
 
         public Form1()
         {
@@ -19,11 +15,21 @@ namespace CSharp.lab6
             // привязал изображение
             picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
 
-            emitter = new TopEmitter
+            this.emitter = new Emitter
             {
-                Width = picDisplay.Width,
-                GravitationY = 0.25f
+                Direction = 0,
+                Spreading = 10,
+                SpeedMin = 10,
+                SpeedMax = 10,
+                ColorFrom = Color.Gold,
+                ColorTo = Color.FromArgb(0, Color.Red),
+                ParticlesPerTick = 10,
+                X = picDisplay.Width / 2,
+                Y = picDisplay.Height / 2,
             };
+
+            emitters.Add(this.emitter); // рендер и обновл
+
 
             /*
             // гравитон
