@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            picDisplay = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)picDisplay).BeginInit();
+            SuspendLayout();
+            // 
+            // picDisplay
+            // 
+            picDisplay.Location = new Point(12, 12);
+            picDisplay.Name = "picDisplay";
+            picDisplay.Size = new Size(490, 426);
+            picDisplay.TabIndex = 0;
+            picDisplay.TabStop = false;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(514, 450);
+            Controls.Add(picDisplay);
+            Name = "Form1";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)picDisplay).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private PictureBox picDisplay;
     }
 }

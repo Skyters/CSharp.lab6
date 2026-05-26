@@ -5,6 +5,9 @@ namespace CSharp.lab6
         public Form1()
         {
             InitializeComponent();
+
+            // привязал изображение
+            picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
         }
     }
 }
