@@ -51,12 +51,21 @@ namespace CSharp.lab6
                     particle.Speed = 1 + Particle.rand.Next(10);
                     particle.Radius = 2 + Particle.rand.Next(10);
                     */
+
+                    /* сброс состояния частицы */
+                    var direction = (double)Particle.rand.Next(360);
+                    var speed = 1 + Particle.rand.Next(10);
+
+                    particle.SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
+                    particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
+
+                    particle.Radius = 2 + Particle.rand.Next(10);
                 }
                 else
                 {
-                    var directionInRadians = particle.Direction / 180 * Math.PI;
-                    particle.X += (float)(particle.Speed * Math.Cos(directionInRadians));
-                    particle.Y -= (float)(particle.Speed * Math.Sin(directionInRadians));
+                    // храним вектор скорости в явном виде и его не надо пересчитывать
+                    particle.X += particle.SpeedX;
+                    particle.Y += particle.SpeedY;
                 }
             }
 

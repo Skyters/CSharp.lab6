@@ -9,18 +9,26 @@ namespace CSharp.lab6
         public int Radius; // радуис частицы
         public float X; // X координата положения частицы в пространстве
         public float Y; // Y координата положения частицы в пространстве
-        
-        public float Direction; // направление движения
-        public float Speed; // скорость перемещения
-        public float Life; // запас здоровья частицы
+
+        public float SpeedX; // скорость перемещения по оси X
+        public float SpeedY; // скорость перемещения по оси Y
+        public float Life; // запас здоровья частицы\
+
+
 
         // добавили генератор случайных чисел
         public static Random rand = new Random();
 
         public Particle()
         {
-            Direction = rand.Next(360);
-            Speed = 1 + rand.Next(10);
+            // генерируем произвольное направление и скорость
+            var direction = (double)rand.Next(360);
+            var speed = 1 + rand.Next(10);
+
+            // рассчитываем вектор скорости
+            SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
+            SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
+
             Radius = 2 + rand.Next(10);
             Life = 20 + rand.Next(100);
 
