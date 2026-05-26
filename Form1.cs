@@ -82,5 +82,11 @@ namespace CSharp.lab6
             emitter.Direction = tbDirection.Value;
             lblDirection.Text = $"{tbDirection.Value}°";
         }
+
+        private void tbSpread_Scroll(object sender, EventArgs e)
+        {
+            emitter.Spreading = tbSpread.Value;
+            lblSpread.Text = $"{tbSpread.Value}";
+        }
     }
 }

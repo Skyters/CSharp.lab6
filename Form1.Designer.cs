@@ -34,8 +34,12 @@
             tbDirection = new TrackBar();
             label1 = new Label();
             lblDirection = new Label();
+            tbSpread = new TrackBar();
+            label2 = new Label();
+            lblSpread = new Label();
             ((System.ComponentModel.ISupportInitialize)picDisplay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbDirection).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbSpread).BeginInit();
             SuspendLayout();
             // 
             // picDisplay
@@ -58,7 +62,7 @@
             tbDirection.Location = new Point(12, 393);
             tbDirection.Maximum = 360;
             tbDirection.Name = "tbDirection";
-            tbDirection.Size = new Size(165, 45);
+            tbDirection.Size = new Size(119, 45);
             tbDirection.TabIndex = 1;
             tbDirection.Scroll += tbDirection_Scroll;
             // 
@@ -74,17 +78,47 @@
             // lblDirection
             // 
             lblDirection.AutoSize = true;
-            lblDirection.Location = new Point(183, 393);
+            lblDirection.Location = new Point(137, 393);
             lblDirection.Name = "lblDirection";
             lblDirection.Size = new Size(18, 15);
             lblDirection.TabIndex = 3;
             lblDirection.Text = "0°";
             // 
+            // tbSpread
+            // 
+            tbSpread.Location = new Point(161, 393);
+            tbSpread.Maximum = 360;
+            tbSpread.Name = "tbSpread";
+            tbSpread.Size = new Size(119, 45);
+            tbSpread.TabIndex = 4;
+            tbSpread.Scroll += tbSpread_Scroll;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(161, 375);
+            label2.Name = "label2";
+            label2.Size = new Size(52, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Разброс";
+            // 
+            // lblSpread
+            // 
+            lblSpread.AutoSize = true;
+            lblSpread.Location = new Point(286, 393);
+            lblSpread.Name = "lblSpread";
+            lblSpread.Size = new Size(18, 15);
+            lblSpread.TabIndex = 6;
+            lblSpread.Text = "0°";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(514, 450);
+            ClientSize = new Size(608, 450);
+            Controls.Add(lblSpread);
+            Controls.Add(label2);
+            Controls.Add(tbSpread);
             Controls.Add(lblDirection);
             Controls.Add(label1);
             Controls.Add(tbDirection);
@@ -93,6 +127,7 @@
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)picDisplay).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbDirection).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbSpread).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -104,5 +139,8 @@
         private TrackBar tbDirection;
         private Label label1;
         private Label lblDirection;
+        private TrackBar tbSpread;
+        private Label label2;
+        private Label lblSpread;
     }
 }
