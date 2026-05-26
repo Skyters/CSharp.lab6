@@ -22,26 +22,7 @@ namespace CSharp.lab6
                                     // если здоровье кончилось
                 if (particle.Life < 0)
                 {
-                    // восстанавливаю здоровье
-                    particle.Life = 20 + Particle.rand.Next(100);
-
-                    // новое начальное расположение частицы — это то, куда указывает курсор
-                    particle.X = MousePositionX;
-                    particle.Y = MousePositionY;
-                    /*// перемещаю частицу в центр
-                    particle.Direction = Particle.rand.Next(360);
-                    particle.Speed = 1 + Particle.rand.Next(10);
-                    particle.Radius = 2 + Particle.rand.Next(10);
-                    */
-
-                    /* сброс состояния частицы */
-                    var direction = (double)Particle.rand.Next(360);
-                    var speed = 1 + Particle.rand.Next(10);
-
-                    particle.SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
-                    particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
-
-                    particle.Radius = 2 + Particle.rand.Next(10);
+                    ResetParticle(particle);
                 }
                 else
                 {
@@ -77,7 +58,9 @@ namespace CSharp.lab6
                     particle.X = picDisplay.Image.Width / 2;
                     particle.Y = picDisplay.Image.Height / 2;
                     */
-                    // добавляю список
+
+                    ResetParticle(particle);
+
                     particles.Add(particle);
                 }
                 else
@@ -102,6 +85,46 @@ namespace CSharp.lab6
             }
         }
 
+        public virtual void ResetParticle(Particle particle)
+        {
+            // восстанавливаю здоровье
+            particle.Life = 20 + Particle.rand.Next(100);
+
+            // новое начальное расположение частицы — это то, куда указывает курсор
+            particle.X = MousePositionX;
+            particle.Y = MousePositionY;
+            /*// перемещаю частицу в центр
+            particle.Direction = Particle.rand.Next(360);
+            particle.Speed = 1 + Particle.rand.Next(10);
+            particle.Radius = 2 + Particle.rand.Next(10);
+            */
+
+            /* сброс состояния частицы */
+            var direction = (double)Particle.rand.Next(360);
+            var speed = 1 + Particle.rand.Next(10);
+
+            particle.SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
+            particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
+
+            particle.Radius = 2 + Particle.rand.Next(10);
+        }
+
+        public class TopEmitter : Emitter
+        {
+            public int Width; // длина экрана
+
+            public override void ResetParticle(Particle particle)
+            {
+                base.ResetParticle(particle); // вызываем базовый сброс частицы, там жизнь переопределяется и все такое
+
+                // а теперь тут уже подкручиваем параметры движения
+                particle.X = Particle.rand.Next(Width); // позиция X -- произвольная точка от 0 до Width
+                particle.Y = 0;  // ноль -- это верх экрана 
+
+                particle.SpeedY = 1; // падаем вниз по умолчанию
+                particle.SpeedX = Particle.rand.Next(-2, 2); // разброс влево и вправа у частиц 
+            }
+        }
     }
 
 }
