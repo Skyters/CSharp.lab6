@@ -161,5 +161,27 @@ namespace CSharp.lab6
         }
     }
 
+    public class ColorPoint : IImpactPoint
+    {
+        public int Radius = 80;
+        public Color TargetColor = Color.Blue;
 
+        public override void ImpactParticle(Particle particle)
+        {
+            float dx = particle.X - X;
+            float dy = particle.Y - Y;
+            float r5 = (float)Math.Sqrt(dx * dx + dy * dy);
+
+            // перекрашиваем только цветные частицы
+            if (r5 < Radius && particle is Particle.ParticleColorful colorful)
+            {
+                colorful.FromColor = TargetColor;
+            }
+        }
+
+        public override void Render(Graphics g)
+        {      
+            g.DrawEllipse(new Pen(TargetColor, 2f), X - Radius, Y - Radius, Radius * 2, Radius * 2);
+        }
+    }
 }

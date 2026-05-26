@@ -6,6 +6,8 @@ namespace CSharp.lab6
 {
     public partial class Form1 : Form
     {
+        List<ColorPoint> colorPoints = new List<ColorPoint>();
+        Emitter snowEmitter;
         List<Emitter> emitters = new List<Emitter>();
         Emitter emitter;
         List<CounterPoint> counterPoints = new List<CounterPoint>();
@@ -24,6 +26,35 @@ namespace CSharp.lab6
             // привязал изображение
             picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
 
+            this.snowEmitter = new Emitter
+            {           
+                ColorFrom = Color.White,
+                ColorTo = Color.FromArgb(0, Color.LightBlue),
+                ParticlesPerTick = 5,
+                SpeedMin = 10,
+                SpeedMax = 10,
+                LifeMin = 80,
+                LifeMax = 150,
+                RadiusMin = 3,
+                RadiusMax = 8,
+                Y = 0,
+                X = picDisplay.Width / 2,
+            };
+
+            emitters.Add(this.snowEmitter);
+
+            var cp1 = new ColorPoint { X = 100, Y = 150, Radius = 70, TargetColor = Color.DeepSkyBlue };
+            var cp2 = new ColorPoint { X = 250, Y = 220, Radius = 70, TargetColor = Color.MediumPurple };
+            var cp3 = new ColorPoint { X = 400, Y = 150, Radius = 70, TargetColor = Color.LimeGreen };
+
+            colorPoints.Add(cp1);
+            colorPoints.Add(cp2);
+            colorPoints.Add(cp3);
+
+
+            foreach (var cp in colorPoints)
+                snowEmitter.impactPoints.Add(cp);
+
             this.emitter = new Emitter
             {
                 Direction = 0,
@@ -38,8 +69,7 @@ namespace CSharp.lab6
             };
 
             emitters.Add(this.emitter); // рендер и обновл
-
-
+           
 
             // привязываем гравитоны к полям
             point1 = new GravityPoint
@@ -79,15 +109,17 @@ namespace CSharp.lab6
 
         private void timer1_Tick(object sender, EventArgs e) // dsdjl xfcnbws
         {
-
-            emitter.UpdateState(); // каждый тик обновляем систему
+            foreach (var em in emitters) //обновляем все эмиттеры
+                em.UpdateState();
 
             lblCount.Text = $"Частиц: {emitter.AliveCount()}";
 
             using (var g = Graphics.FromImage(picDisplay.Image))
             {
                 g.Clear(Color.Black); // фон
-                emitter.Render(g); // рендерим систему
+                foreach (var em in emitters) // рендерим систему
+                    em.Render(g);
+                
             }
 
             picDisplay.Invalidate();
@@ -205,5 +237,15 @@ namespace CSharp.lab6
             emitter.LifeMin = tbLife.Value;
         }
 
+        private void tbColorPoint_Scroll(object sender, EventArgs e)
+        {
+            int offset = tbColorPoint.Value;
+            int step = picDisplay.Width / (colorPoints.Count + 1);
+
+            for (int i = 0; i < colorPoints.Count; i++)
+            {         
+                colorPoints[i].X = (step * (i + 1) + offset) % picDisplay.Width;
+            }
+        }
     }
 }

@@ -85,7 +85,7 @@ namespace CSharp.lab6
 
             while (particlesToCreate >= 1)
             {
-                //particlesToCreate -= 1;
+                particlesToCreate -= 1;
                 var particle = CreateParticle();
                 ResetParticle(particle);
                 particles.Add(particle);
@@ -123,6 +123,12 @@ namespace CSharp.lab6
             particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
 
             particle.Radius = Particle.rand.Next(RadiusMin, RadiusMax);
+
+            if (particle is Particle.ParticleColorful colorful)
+            {
+                colorful.FromColor = ColorFrom;
+                colorful.ToColor = ColorTo;
+            }
         }
 
         public class TopEmitter : Emitter

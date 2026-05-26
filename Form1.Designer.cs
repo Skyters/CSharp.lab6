@@ -53,6 +53,8 @@
             tbLife = new TrackBar();
             label7 = new Label();
             lblCount = new Label();
+            tbColorPoint = new TrackBar();
+            label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)picDisplay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbDirection).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbSpread).BeginInit();
@@ -61,6 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)tbSpeed).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbCount).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbLife).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbColorPoint).BeginInit();
             SuspendLayout();
             // 
             // picDisplay
@@ -257,7 +260,7 @@
             // 
             // tbLife
             // 
-            tbLife.Location = new Point(510, 196);
+            tbLife.Location = new Point(510, 198);
             tbLife.Maximum = 100;
             tbLife.Name = "tbLife";
             tbLife.Size = new Size(119, 45);
@@ -276,17 +279,37 @@
             // lblCount
             // 
             lblCount.AutoSize = true;
-            lblCount.Location = new Point(510, 244);
+            lblCount.Location = new Point(510, 326);
             lblCount.Name = "lblCount";
             lblCount.Size = new Size(125, 15);
             lblCount.TabIndex = 23;
             lblCount.Text = "Количество частиц: 0";
+            // 
+            // tbColorPoint
+            // 
+            tbColorPoint.Location = new Point(508, 278);
+            tbColorPoint.Maximum = 100;
+            tbColorPoint.Name = "tbColorPoint";
+            tbColorPoint.Size = new Size(119, 45);
+            tbColorPoint.TabIndex = 24;
+            tbColorPoint.Scroll += tbColorPoint_Scroll;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(512, 245);
+            label8.Name = "label8";
+            label8.Size = new Size(141, 30);
+            label8.TabIndex = 25;
+            label8.Text = "Точки перекрашивания \r\nчастиц";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(661, 450);
+            Controls.Add(label8);
+            Controls.Add(tbColorPoint);
             Controls.Add(lblCount);
             Controls.Add(label7);
             Controls.Add(tbLife);
@@ -320,6 +343,7 @@
             ((System.ComponentModel.ISupportInitialize)tbSpeed).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbCount).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbLife).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbColorPoint).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -350,5 +374,7 @@
         private TrackBar tbLife;
         private Label label7;
         private Label lblCount;
+        private TrackBar tbColorPoint;
+        private Label label8;
     }
 }
