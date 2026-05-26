@@ -24,7 +24,7 @@ namespace CSharp.lab6
         public int SpeedMax = 10; // начальная максимальная скорость движения частицы
         public int RadiusMin = 2; // минимальный радиус частицы
         public int RadiusMax = 10; // максимальный радиус частицы
-        public int LifeMin = 20; // минимальное время жизни частицы
+        public int LifeMin = 10; // минимальное время жизни частицы
         public int LifeMax = 100; // максимальное время жизни частицы
 
         public int ParticlesPerTick = 1;
@@ -33,6 +33,18 @@ namespace CSharp.lab6
         public Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
 
 
+        public int AliveCount()
+        {           
+            {
+                int count = 0;
+                foreach (var p in particles)
+                {
+                    if (p.Life > 0)
+                        count++;
+                }
+                return count;
+            }
+        }
 
         public void UpdateState() // обновления состояния системы
         {
@@ -52,6 +64,8 @@ namespace CSharp.lab6
 
                 else
                 {
+                    particle.Life -= 1;
+
                     // храним вектор скорости в явном виде и его не надо пересчитывать
                     particle.X += particle.SpeedX;
                     particle.Y += particle.SpeedY;
@@ -71,7 +85,7 @@ namespace CSharp.lab6
 
             while (particlesToCreate >= 1)
             {
-                particlesToCreate -= 1;
+                //particlesToCreate -= 1;
                 var particle = CreateParticle();
                 ResetParticle(particle);
                 particles.Add(particle);

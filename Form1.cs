@@ -82,6 +82,8 @@ namespace CSharp.lab6
 
             emitter.UpdateState(); // каждый тик обновляем систему
 
+            lblCount.Text = $"Частиц: {emitter.AliveCount()}";
+
             using (var g = Graphics.FromImage(picDisplay.Image))
             {
                 g.Clear(Color.Black); // фон
@@ -187,6 +189,21 @@ namespace CSharp.lab6
             }
         }
 
+        private void tbSpeed_Scroll(object sender, EventArgs e)
+        {
+            emitter.SpeedMin = tbSpeed.Value;
+            lblSpeed.Text = $"{tbSpeed.Value}";
+        }
+
+        private void tbCount_Scroll(object sender, EventArgs e)
+        {
+            emitter.ParticlesPerTick = tbCount.Value;
+        }
+
+        private void tbLife_Scroll(object sender, EventArgs e)
+        {
+            emitter.LifeMin = tbLife.Value;
+        }
 
     }
 }

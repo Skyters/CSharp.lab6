@@ -45,11 +45,22 @@
             lblGraviton = new Label();
             btnradio1 = new RadioButton();
             btnradio2 = new RadioButton();
+            tbSpeed = new TrackBar();
+            label5 = new Label();
+            lblSpeed = new Label();
+            tbCount = new TrackBar();
+            label6 = new Label();
+            tbLife = new TrackBar();
+            label7 = new Label();
+            lblCount = new Label();
             ((System.ComponentModel.ISupportInitialize)picDisplay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbDirection).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbSpread).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbGraviton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbAntiGraviton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbSpeed).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbCount).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbLife).BeginInit();
             SuspendLayout();
             // 
             // picDisplay
@@ -125,7 +136,7 @@
             // 
             // tbGraviton
             // 
-            tbGraviton.Location = new Point(462, 393);
+            tbGraviton.Location = new Point(510, 130);
             tbGraviton.Maximum = 100;
             tbGraviton.Name = "tbGraviton";
             tbGraviton.Size = new Size(119, 45);
@@ -134,7 +145,7 @@
             // 
             // tbAntiGraviton
             // 
-            tbAntiGraviton.Location = new Point(310, 393);
+            tbAntiGraviton.Location = new Point(510, 79);
             tbAntiGraviton.Maximum = 100;
             tbAntiGraviton.Name = "tbAntiGraviton";
             tbAntiGraviton.Size = new Size(119, 45);
@@ -144,7 +155,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(310, 375);
+            label3.Location = new Point(510, 61);
             label3.Name = "label3";
             label3.Size = new Size(84, 15);
             label3.TabIndex = 9;
@@ -153,7 +164,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(462, 375);
+            label4.Location = new Point(510, 112);
             label4.Name = "label4";
             label4.Size = new Size(58, 15);
             label4.TabIndex = 10;
@@ -162,7 +173,7 @@
             // lblAntiGraviton
             // 
             lblAntiGraviton.AutoSize = true;
-            lblAntiGraviton.Location = new Point(435, 393);
+            lblAntiGraviton.Location = new Point(635, 79);
             lblAntiGraviton.Name = "lblAntiGraviton";
             lblAntiGraviton.Size = new Size(18, 15);
             lblAntiGraviton.TabIndex = 11;
@@ -171,7 +182,7 @@
             // lblGraviton
             // 
             lblGraviton.AutoSize = true;
-            lblGraviton.Location = new Point(578, 393);
+            lblGraviton.Location = new Point(626, 130);
             lblGraviton.Name = "lblGraviton";
             lblGraviton.Size = new Size(18, 15);
             lblGraviton.TabIndex = 12;
@@ -201,11 +212,89 @@
             btnradio2.UseVisualStyleBackColor = true;
             btnradio2.CheckedChanged += btnradio2_CheckedChanged;
             // 
+            // tbSpeed
+            // 
+            tbSpeed.Location = new Point(310, 393);
+            tbSpeed.Name = "tbSpeed";
+            tbSpeed.Size = new Size(119, 45);
+            tbSpeed.TabIndex = 15;
+            tbSpeed.Scroll += tbSpeed_Scroll;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(310, 375);
+            label5.Name = "label5";
+            label5.Size = new Size(59, 15);
+            label5.TabIndex = 16;
+            label5.Text = "Скорость";
+            // 
+            // lblSpeed
+            // 
+            lblSpeed.AutoSize = true;
+            lblSpeed.Location = new Point(435, 393);
+            lblSpeed.Name = "lblSpeed";
+            lblSpeed.Size = new Size(13, 15);
+            lblSpeed.TabIndex = 17;
+            lblSpeed.Text = "0";
+            // 
+            // tbCount
+            // 
+            tbCount.Location = new Point(454, 393);
+            tbCount.Name = "tbCount";
+            tbCount.Size = new Size(119, 45);
+            tbCount.TabIndex = 18;
+            tbCount.Scroll += tbCount_Scroll;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(454, 375);
+            label6.Name = "label6";
+            label6.Size = new Size(87, 15);
+            label6.TabIndex = 20;
+            label6.Text = "Кол-во частиц";
+            // 
+            // tbLife
+            // 
+            tbLife.Location = new Point(510, 196);
+            tbLife.Maximum = 100;
+            tbLife.Name = "tbLife";
+            tbLife.Size = new Size(119, 45);
+            tbLife.TabIndex = 21;
+            tbLife.Scroll += tbLife_Scroll;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(510, 178);
+            label7.Name = "label7";
+            label7.Size = new Size(84, 15);
+            label7.TabIndex = 22;
+            label7.Text = "Жизнь частиц";
+            // 
+            // lblCount
+            // 
+            lblCount.AutoSize = true;
+            lblCount.Location = new Point(510, 244);
+            lblCount.Name = "lblCount";
+            lblCount.Size = new Size(125, 15);
+            lblCount.TabIndex = 23;
+            lblCount.Text = "Количество частиц: 0";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(661, 450);
+            Controls.Add(lblCount);
+            Controls.Add(label7);
+            Controls.Add(tbLife);
+            Controls.Add(label6);
+            Controls.Add(tbCount);
+            Controls.Add(lblSpeed);
+            Controls.Add(label5);
+            Controls.Add(tbSpeed);
             Controls.Add(btnradio2);
             Controls.Add(btnradio1);
             Controls.Add(lblGraviton);
@@ -228,6 +317,9 @@
             ((System.ComponentModel.ISupportInitialize)tbSpread).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbGraviton).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbAntiGraviton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbSpeed).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbCount).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbLife).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -250,5 +342,13 @@
         private Label lblGraviton;
         private RadioButton btnradio1;
         private RadioButton btnradio2;
+        private TrackBar tbSpeed;
+        private Label label5;
+        private Label lblSpeed;
+        private TrackBar tbCount;
+        private Label label6;
+        private TrackBar tbLife;
+        private Label label7;
+        private Label lblCount;
     }
 }
