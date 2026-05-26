@@ -8,7 +8,7 @@ namespace CSharp.lab6
     public class Emitter
     {
         List<Particle> particles = new List<Particle>();
-        public List<Point> gravityPoints = new List<Point>(); // тут буду хранится точки притяжения
+        public List<IImpactPoint> impactPoints = new List<IImpactPoint>();// тут буду хранится точки притяжения
         public int MousePositionX;
         public int MousePositionY;
         public float GravitationX = 0;
@@ -16,55 +16,9 @@ namespace CSharp.lab6
 
         public void UpdateState() // обновления состояния системы
         {
-            foreach (var particle in particles)
+            foreach (var point in impactPoints)
             {
-                particle.Life -= 1; // уменьшаю здоровье
-                                    // если здоровье кончилось
-                if (particle.Life < 0)
-                {
-                    // восстанавливаю здоровье
-                    particle.Life = 20 + Particle.rand.Next(100);
-
-                    // новое начальное расположение частицы — это то, куда указывает курсор
-                    particle.X = MousePositionX;
-                    particle.Y = MousePositionY;
-                    /*// перемещаю частицу в центр
-                    particle.Direction = Particle.rand.Next(360);
-                    particle.Speed = 1 + Particle.rand.Next(10);
-                    particle.Radius = 2 + Particle.rand.Next(10);
-                    */
-
-                    /* сброс состояния частицы */
-                    var direction = (double)Particle.rand.Next(360);
-                    var speed = 1 + Particle.rand.Next(10);
-
-                    particle.SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
-                    particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
-
-                    particle.Radius = 2 + Particle.rand.Next(10);
-                }
-                else
-                {
-                    // каждая точка по-своему воздействует на вектор скорости
-                    foreach (var point in gravityPoints)
-                    {
-                        float gX = point.X - particle.X;
-                        float gY = point.Y - particle.Y;
-                        float r2 = gX * gX + gY * gY;
-                        float M = 100;
-
-                        particle.SpeedX += (gX) * M / r2;
-                        particle.SpeedY += (gY) * M / r2;
-                    }
-
-                    // гравитация воздействует на вектор скорости, поэтому пересчитываем его
-                    particle.SpeedX += GravitationX;
-                    particle.SpeedY += GravitationY;
-
-                    // храним вектор скорости в явном виде и его не надо пересчитывать
-                    particle.X += particle.SpeedX;
-                    particle.Y += particle.SpeedY;
-                }
+                point.ImpactParticle(particle);
             }
 
             // генерирую 500 частиц
@@ -102,15 +56,9 @@ namespace CSharp.lab6
             }
 
             // рисую точки притяжения красными кружочками
-            foreach (var point in gravityPoints)
+            foreach (var point in impactPoints)
             {
-                g.FillEllipse(
-                    new SolidBrush(Color.Red),
-                    point.X - 5,
-                    point.Y - 5,
-                    10,
-                    10
-                );
+                ; point.Render(g);
             }
         }
 
