@@ -76,5 +76,11 @@ namespace CSharp.lab6
             emitter.MousePositionX = e.X;
             emitter.MousePositionY = e.Y;
         }
+
+        private void tbDirection_Scroll(object sender, EventArgs e)
+        {
+            emitter.Direction = tbDirection.Value;
+            lblDirection.Text = $"{tbDirection.Value}°";
+        }
     }
 }
