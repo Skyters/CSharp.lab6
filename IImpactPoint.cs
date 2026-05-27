@@ -80,8 +80,8 @@ namespace CSharp.lab6
             // окружность
             g.DrawEllipse(
                    new Pen(Color.Red),
-                   X - Power / 1,
-                   Y - Power / 1,
+                   X - Power / 2,
+                   Y - Power / 2,
                    Power,
                    Power
             );

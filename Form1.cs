@@ -39,9 +39,11 @@ namespace CSharp.lab6
                 RadiusMax = 8,
                 Y = 0,
                 X = picDisplay.Width / 2,
+
             };
 
             emitters.Add(this.snowEmitter);
+            tbColorPoint.Maximum = picDisplay.Width;
 
             var cp1 = new ColorPoint { X = 100, Y = 150, Radius = 70, TargetColor = Color.DeepSkyBlue };
             var cp2 = new ColorPoint { X = 250, Y = 220, Radius = 70, TargetColor = Color.MediumPurple };
@@ -50,7 +52,6 @@ namespace CSharp.lab6
             colorPoints.Add(cp1);
             colorPoints.Add(cp2);
             colorPoints.Add(cp3);
-
 
             foreach (var cp in colorPoints)
                 snowEmitter.impactPoints.Add(cp);
@@ -66,10 +67,13 @@ namespace CSharp.lab6
                 ParticlesPerTick = 10,
                 X = picDisplay.Width / 2,
                 Y = picDisplay.Height / 2,
+
             };
 
             emitters.Add(this.emitter); // рендер и обновл
-           
+
+            foreach (var cp in colorPoints)
+                emitter.impactPoints.Add(cp);
 
             // привязываем гравитоны к полям
             point1 = new GravityPoint
@@ -79,8 +83,9 @@ namespace CSharp.lab6
             };
             point2 = new AntiGravityPoint
             {
-                X = picDisplay.Width / 2 - 140,
-                Y = picDisplay.Height / 1,
+                X = picDisplay.Width / 2 - 200,
+                Y = (float)(picDisplay.Height / 1.2),
+                Power = 20,
             };
             point3 = new BouncePoint
             {
@@ -105,6 +110,11 @@ namespace CSharp.lab6
             emitter.impactPoints.Add(point3);
             emitter.impactPoints.Add(point4);
             emitter.impactPoints.Add(point5);
+            snowEmitter.impactPoints.Add(point1);
+            snowEmitter.impactPoints.Add(point2);
+            snowEmitter.impactPoints.Add(point3);
+            snowEmitter.impactPoints.Add(point4);
+            snowEmitter.impactPoints.Add(point5);
         }
 
         private void timer1_Tick(object sender, EventArgs e) // dsdjl xfcnbws
@@ -142,6 +152,7 @@ namespace CSharp.lab6
         private void tbDirection_Scroll(object sender, EventArgs e)
         {
             emitter.Direction = tbDirection.Value;
+            snowEmitter.Direction = tbDirection.Value;
             lblDirection.Text = $"{tbDirection.Value}°";
         }
 
@@ -149,6 +160,7 @@ namespace CSharp.lab6
         {
 
             emitter.Spreading = tbSpread.Value;
+            snowEmitter.Spreading = tbSpread.Value;
             lblSpread.Text = $"{tbSpread.Value}";
         }
 
@@ -194,14 +206,14 @@ namespace CSharp.lab6
         {
             if (e.Button == MouseButtons.Left)
             {
-                // новый счётчик на место клика
+                // новый счётчик
                 var counter = new CounterPoint { X = e.X, Y = e.Y };
                 counterPoints.Add(counter);
                 emitter.impactPoints.Add(counter);
             }
             else if (e.Button == MouseButtons.Right)
             {
-                // удалить ближайший счётчик к месту клика
+                // удалить счётчик
                 var nearest = counterPoints
                     .OrderBy(c => Math.Pow(c.X - e.X, 2) + Math.Pow(c.Y - e.Y, 2))
                     .FirstOrDefault();
@@ -224,17 +236,22 @@ namespace CSharp.lab6
         private void tbSpeed_Scroll(object sender, EventArgs e)
         {
             emitter.SpeedMin = tbSpeed.Value;
+            emitter.SpeedMax = tbSpeed.Value + 1;
+            snowEmitter.SpeedMin = tbSpread.Value;
+            snowEmitter.SpeedMax = tbSpread.Value + 1;
             lblSpeed.Text = $"{tbSpeed.Value}";
         }
 
         private void tbCount_Scroll(object sender, EventArgs e)
         {
             emitter.ParticlesPerTick = tbCount.Value;
+            snowEmitter.ParticlesPerTick = tbCount.Value;
         }
 
         private void tbLife_Scroll(object sender, EventArgs e)
         {
             emitter.LifeMin = tbLife.Value;
+            snowEmitter.LifeMin = tbLife.Value;
         }
 
         private void tbColorPoint_Scroll(object sender, EventArgs e)
